@@ -3,157 +3,215 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Teams · Practica paso a paso</title>
-<link rel="stylesheet" href="Recursos/Recursos_Teams/teams.css">
+  <title>Modelo Live 2026</title>
+  <link rel="stylesheet" href="Recursos/bootstrap-icons/bootstrap-icons.css">
+ <link rel="stylesheet" href="Recursos/modelo-live.css">
 </head>
 
 <body>
-  <header class="page-header">
-    <div>
-      <div class="eyebrow">
-        MODELO LIVE 2026 · PRUEBA INTERACTIVA
-      </div>
-
-      <h1>Aprende Teams haciendo</h1>
-
-      <p>
-        Tres recorridos. Sigue las indicaciones y practica en la pantalla.
-      </p>
+  <div id="fondo-animado" aria-hidden="true"></div>
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <clipPath id="forma-encabezado" clipPathUnits="objectBoundingBox">
+      <path d="
+        M .025 0
+        H .975
+        Q 1 0 1 .09
+        V .82
+        Q 1 .91 .975 .91
+        H .57
+        C .535 .91 .535 1 .5 1
+        C .465 1 .465 .91 .43 .91
+        H .025
+        Q 0 .91 0 .82
+        V .09
+        Q 0 0 .025 0
+        Z
+      "/>
+    </clipPath>
+  </defs>
+</svg>
+  <main class="contenedor">
+   <header class="encabezado">
+  <div class="barra-encabezado">
+    <div class="marca">
+      <img
+        class="logo"
+        src="Recursos/Imagenes/cnci_logo_blanco.png"
+        alt="Universidad Virtual CNCI"
+      >
     </div>
 
-    <span class="tag">
-      Simulación · sin conexión a tu cuenta
-    </span>
-  </header>
+    <button
+      id="cambiar-tema"
+      class="cambiar-tema"
+      type="button"
+      aria-label="Activar modo oscuro"
+      aria-pressed="false"
+    >
+      <i class="bi bi-moon" aria-hidden="true"></i>
+      <span>Modo oscuro</span>
+    </button>
+  </div>
 
-  <main class="wrap">
-    <nav class="chapters" aria-label="Tutoriales">
-      <button type="button" data-chapter="0">
-        01 · Creación del equipo
-        <small>De un clic a tu aula de clase</small>
-      </button>
+  <div class="intro">
+    <span class="eyebrow">RECURSOS PARA DOCENTES</span>
 
-      <button type="button" data-chapter="1">
-        02 · Programación de sesiones
-        <small>Tres sábados en el calendario</small>
-      </button>
+    <h1>MODELO LIVE 2026</h1>
 
-      <button type="button" data-chapter="2">
-        03 · Publicación de la grabación
-        <small>Comparte la clase en General</small>
-      </button>
-    </nav>
-
-    <div class="layout">
-      <aside class="coach">
-        <span class="badge">Tu guía paso a paso</span>
-
-        <div class="step" id="counter"></div>
-        <h2 id="instruction"></h2>
-        <p id="explanation"></p>
-        <div class="audio-controles">
-  <button type="button" id="iniciar-audio">
-    ▶ Comenzar con audio
-  </button>
-
-  <button type="button" id="repetir-audio" disabled>
-    ↻ Repetir audio
-  </button>
-
-  <button type="button" id="silenciar-audio" disabled>
-    Silenciar
-  </button>
-</div>
-
-<p id="estado-audio" role="status"></p>
-
-        <div class="progress">
-          <div id="bar"></div>
-        </div>
-
-        <p class="hint">
-          El borde naranja indica dónde interactuar.
-          Los datos son de práctica.
-        </p>
-
-        <footer>
-          <button type="button" id="back">
-            ← Paso anterior
-          </button>
-
-          <button type="button" id="reset">
-            Reiniciar
-          </button>
-        </footer>
-      </aside>
-
-      <section class="app" aria-label="Simulación de Microsoft Teams">
-        <div class="topbar">
-          <span class="lanzador" aria-hidden="true">⠿</span>
-          <span class="brand">Teams</span>
-
-          <div class="search">
-            ⌕ Búsqueda (Ctrl+Alt+E)
-          </div>
-
-          <span aria-hidden="true">···</span>
-          <span class="avatar">DO</span>
-        </div>
-
-        <div class="appbody">
-          <nav class="rail" aria-label="Menú de Teams">
-            <span>
-              <b aria-hidden="true">♧</b>
-              Actividad
-            </span>
-
-            <span>
-              <b aria-hidden="true">☏</b>
-              Chat
-            </span>
-
-            <span class="rail-activo" id="rail-teams">
-              <b aria-hidden="true">▣</b>
-              Equipos
-            </span>
-
-            <span>
-              <b aria-hidden="true">▢</b>
-              Tareas
-            </span>
-
-            <span id="rail-calendar">
-              <b aria-hidden="true">▦</b>
-              Calendario
-            </span>
-
-            <span>
-              <b aria-hidden="true">···</b>
-              Más
-            </span>
-
-            <span>
-              <b aria-hidden="true">⊞</b>
-              Aplicaciones
-            </span>
-          </nav>
-
-          <div class="workspace" id="screen"></div>
-        </div>
-      </section>
-    </div>
-
-    <p class="bottomnote">
-      Prototipo educativo inspirado en Teams.
-      Los botones y pantallas pueden variar en tu versión institucional.
-      <br>
-      Fechas de ejemplo: 10, 17 y 24 de octubre de 2026.
-      Horario de práctica: 14:00–15:30.
-      <br>
-      No se crean equipos ni publicaciones reales.
+    <p>
+      Explora los lineamientos, tutoriales y recursos que te ayudarán
+      a preparar y desarrollar tus clases bajo el Modelo Live.
     </p>
+  </div>
+
+  <i
+    class="bi bi-arrow-down remate-encabezado"
+    aria-hidden="true"
+  ></i>
+</header>
+
+    <section id="menu">
+      <div class="acceso-manual-live">
+  <a
+    href="Recursos/Manual y lineamientos.pdf"
+    class="boton-manual-live"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Abrir Manual y lineamientos del Modelo Live en PDF"
+  >
+    <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+    Manual y lineamientos
+    <span class="manual-live-formato">PDF <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i></span>
+  </a>
+</div>
+      <p class="indicacion">Selecciona un tema para ver su información y video.</p>
+
+      <div class="cuadricula">
+        <button class="tarjeta" data-tema="composicion">
+          <span class="pestana" aria-hidden="true"></span>
+          <h2>Composición de cursos</h2>
+          <img
+    src="Recursos/Imagenes/Cursos.png"
+    alt="Íconos de las etapas de la sesión"
+    class="imagen-Tips"
+  >
+  <span class="abrir">
+  Abrir tema
+  <i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i>
+</span>
+
+        <button class="tarjeta" data-tema="sesiones">
+          <span class="pestana" aria-hidden="true"></span>
+          <h2>Sesiones sincrónicas</h2>
+          <img
+    src="Recursos/Imagenes/Sincronas.png"
+    alt="Íconos de las etapas de la sesión"
+    class="imagen-Tips"
+  >
+          <span class="abrir">
+  Abrir tema
+  <i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i>
+</span>
+
+        <button class="tarjeta ancha" data-tema="estructura">
+          <span class="pestana" aria-hidden="true"></span>
+          <h2>Estructura de sesión</h2>
+           <div class="estructura-resumen">
+  <img
+    src="Recursos/Imagenes/EstructuraSesion.png"
+    alt="Íconos de las etapas de la sesión"
+    class="estructura-iconos"
+  >
+
+  <div class="estructura-etiquetas">
+    <span>Saludo</span>
+    <span>Pregunta<br>detonadora</span>
+    <span>Participación</span>
+    <span>Explicación</span>
+    <span>Actividad</span>
+    <span>Cierre</span>
+  </div>
+</div>
+          <span class="abrir">
+  Abrir tema
+  <i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i>
+</span>
+
+        <button class="tarjeta" data-tema="tips">
+          <span class="pestana" aria-hidden="true"></span>
+          <h2>Tips para una clase dinámica</h2>
+
+          <img
+    src="Recursos/Imagenes/Tips.png"
+    alt="Íconos de las etapas de la sesión"
+    class="imagen-Tips"
+           >
+           <span class="abrir">
+  Abrir tema
+  <i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i>
+</span>
+        </button>
+
+        <button class="tarjeta" data-tema="banco">
+          <span class="pestana" aria-hidden="true"></span>
+          <h2>Banco de actividades: cómo elegir</h2>
+          <img
+    src="Recursos/Imagenes/Actividades.png"
+    alt="Íconos de las etapas de la sesión"
+    class="imagen-Tips"
+           >
+           <span class="abrir">
+  Abrir tema
+  <i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i>
+</span>
+        </button>
+
+        <button class="tarjeta ancha" data-tema="teams">
+  <span class="pestana" aria-hidden="true"></span>
+  <h2>Gestión de sesiones en Teams:</h2>
+
+  <div class="teams-resumen">
+     
+    <img
+      src="Recursos/Imagenes/Teams.png"
+      alt="Gestión de sesiones en Teams"
+      class="teams-imagen"
+    >
+      <div class="teams-etiquetas">
+    <span>Creación del equipo</span>
+    <span>Programación de sesiones</span>
+    <span>Publicación de la grabación</span>
+  </div>
+    
+  </div>
+
+  <span class="abrir">
+  Abrir tema
+  <i class="bi bi-arrow-left-circle-fill" aria-hidden="true"></i>
+</span>
+</button>
+
+     
+      </div>
+    </section>
+
+    <section id="detalle" class="detalle" aria-live="polite">
+      <div class="panel-detalle">
+        <span class="pestana" aria-hidden="true"></span>
+        <h2 id="titulo-detalle"></h2>
+        <div id="contenido-detalle" class="contenido-detalle"></div>
+        <div id="reproductor" class="reproductor"></div>
+        <button id="volver" class="volver"><i class="bi bi-arrow-left" aria-hidden="true"></i> Volver a la guía</button>
+      </div>
+    </section>
+    <footer class="pie-pagina">
+  Universidad Virtual CNCI · Modelo Live 2026
+</footer>
   </main>
-<script src="Recursos/Recursos_Teams/teams.js"></script>
+
+<script src="Recursos/modelo-live.js"></script>
+<script src="Recursos/JS/three.min.js"></script>
+<script src="Recursos/JS/vanta.net.min.js"></script>
 </body>
 </html>

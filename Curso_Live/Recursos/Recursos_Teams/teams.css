@@ -1029,3 +1029,78 @@ textarea {
     margin-left: 0;
   }
 }
+
+/* ACCIONES BLOQUEADAS DURANTE LA EXPLICACIÓN */
+
+.bloqueado-por-audio {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ERROR VISIBLE ARRIBA DEL FORMULARIO */
+
+.reunion-error:empty {
+  display: none;
+}
+
+.reunion-error:not(:empty) {
+  display: block;
+  margin: 16px 0;
+  padding: 16px 18px;
+
+  background: #fff0ed;
+  border: 1px solid #e3a49b;
+  border-left: 5px solid #b42318;
+  border-radius: 12px;
+
+  color: #922018;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* INDICACIÓN PARA BAJAR */
+
+.aviso-bajar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+
+  margin: 16px 0;
+  padding: 16px 18px;
+
+  background: #fff4df;
+  border: 1px solid #e9c889;
+  border-left: 5px solid #d88916;
+  border-radius: 12px;
+
+  color: #624414;
+}
+
+.aviso-bajar > div {
+  flex: 1 1 240px;
+}
+
+.aviso-bajar p {
+  margin: 6px 0 0;
+  line-height: 1.5;
+}
+
+.boton-bajar {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 10px;
+
+  background: #2e6cff;
+  color: #ffffff;
+
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.boton-bajar:focus-visible {
+  outline: 3px solid #073b78;
+  outline-offset: 3px;
+}

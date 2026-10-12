@@ -399,6 +399,33 @@ function formularioReunion() {
         </div>
       </header>
 
+      <div
+  id="error"
+  class="message reunion-error"
+  role="alert"
+  tabindex="-1"
+></div>
+
+${step === 1 ? `
+  <div class="aviso-bajar">
+    <div>
+      <strong>Antes de enviar, configura la periodicidad</strong>
+      <p>
+        Escribe el nombre de la reunión y desplázate hacia abajo
+        para encontrar el botón Configurar periodicidad.
+      </p>
+    </div>
+
+    <button
+      type="button"
+      class="boton-bajar"
+      data-scroll="periodicidad"
+    >
+      Ir al botón ↓
+    </button>
+  </div>
+` : ""}
+
       <div class="reunion-pestanas">
         <strong>Detalles</strong>
         <span>Asistente para programación</span>
@@ -531,7 +558,7 @@ function formularioReunion() {
             ></textarea>
           </div>
 
-          <div id="error" class="message" role="alert"></div>
+        
 
           ${
             step === 1
@@ -752,15 +779,18 @@ document.addEventListener("click", function (event) {
     }
 
     case "enviar-sesiones":
-      if (step !== 3) {
-        showError(
-          "Completa el título y guarda la periodicidad antes de enviar."
-        );
-        return;
-      }
+  if (step !== 3) {
+    showError(
+      step === 1
+        ? "Todavía no puedes enviar. Escribe Sesiones sincrónicas y desplázate hacia abajo para pulsar Configurar periodicidad."
+        : "Todavía no puedes enviar. Selecciona Semanalmente y guarda la periodicidad antes de continuar."
+    );
 
-      advance();
-      break;
+    return;
+  }
+
+  advance();
+  break;
 
     case "cerrar-reunion":
       step = 0;
@@ -880,6 +910,7 @@ function renderRecordingPublication() {
 
 // AUDIO DE CADA PASO
 
+
 const audiosPorTutorial = [
   [
     "Recursos/Recursos_Teams/Audios/Vamos a crear tu equipo en Microsoft Teams.mp3",
@@ -888,12 +919,19 @@ const audiosPorTutorial = [
     "Recursos/Recursos_Teams/Audios/equipo_04.mp3",
     "Recursos/Recursos_Teams/Audios/equipo_05.mp3"
   ],
-
-  // Después añadiremos los audios de programación.
-  [],
-
-  // Después añadiremos los audios de publicación.
-  []
+  [
+    "Recursos/Recursos_Teams/Audios/Programar_reunion01.mp3",
+    "Recursos/Recursos_Teams/Audios/Coloca_SesionesSincronicas.mp3",
+    "Recursos/Recursos_Teams/Audios/Programa_los_3Sab.mp3",
+    "Recursos/Recursos_Teams/Audios/Respeta_Horarios.mp3"
+  ],
+  [
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion01.mp3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion02.mp3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion03.mp3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion04.mp3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion05.mp3"
+  ]
 ];
 
 const vozTutorial = new Audio();
@@ -902,26 +940,101 @@ vozTutorial.preload = "metadata";
 let audioActivado = false;
 let audioSilenciado = false;
 let solicitudAudio = 0;
+let audioEnCurso = false;
+
+const controlesBloqueados = new Map();
+
+const selectorControlesAudio = [
+  "#screen button",
+  "#screen select",
+  "[data-chapter]",
+  "#back",
+  "#reset",
+  "#repetir-audio"
+].join(", ");
+
+function bloquearAccionesDuranteAudio() {
+  audioEnCurso = true;
+
+  document.querySelectorAll(selectorControlesAudio)
+    .forEach(control => {
+      // Recordar cuáles ya estaban deshabilitados.
+      if (!controlesBloqueados.has(control)) {
+        controlesBloqueados.set(control, control.disabled);
+      }
+
+      control.disabled = true;
+      control.classList.add("bloqueado-por-audio");
+    });
+}
+
+function desbloquearAccionesDelAudio() {
+  audioEnCurso = false;
+
+  controlesBloqueados.forEach((estabaDeshabilitado, control) => {
+    control.disabled = estabaDeshabilitado;
+    control.classList.remove("bloqueado-por-audio");
+  });
+
+  controlesBloqueados.clear();
+}
+
+// Protección adicional para los eventos de la práctica.
+document.addEventListener("click", event => {
+  if (!audioEnCurso) return;
+  if (!(event.target instanceof Element)) return;
+
+  const control = event.target.closest(selectorControlesAudio);
+  if (!control) return;
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+}, true);
+
+document.addEventListener("change", event => {
+  if (!audioEnCurso) return;
+
+  if (event.target.id === "periodicidad") {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
+}, true);
+
+function mostrarErrorDeAudio() {
+  desbloquearAccionesDelAudio();
+
+  document.getElementById("estado-audio").textContent =
+    "No se pudo reproducir el audio. Puedes continuar o pulsar Repetir audio.";
+}
+
+vozTutorial.addEventListener("ended", () => {
+  desbloquearAccionesDelAudio();
+
+  document.getElementById("estado-audio").textContent =
+    "Explicación terminada. Ya puedes realizar la acción.";
+});
+
+vozTutorial.addEventListener("error", () => {
+  if (audioEnCurso) mostrarErrorDeAudio();
+});
 
 function reproducirAudioDelPaso() {
   const solicitudActual = ++solicitudAudio;
 
-  // Detener la voz anterior antes de cambiar de paso.
+  desbloquearAccionesDelAudio();
+
   vozTutorial.pause();
   vozTutorial.removeAttribute("src");
   vozTutorial.load();
 
   const ruta = audiosPorTutorial[chapter]?.[step];
-
   const estado = document.getElementById("estado-audio");
   const repetir = document.getElementById("repetir-audio");
 
-  repetir.disabled =
-    !audioActivado || audioSilenciado || !ruta;
-
+  repetir.disabled = !audioActivado || !ruta;
   estado.textContent = "";
 
-  if (!audioActivado || audioSilenciado) return;
+  if (!audioActivado) return;
 
   if (!ruta) {
     estado.textContent = "Este paso todavía no tiene audio.";
@@ -929,13 +1042,17 @@ function reproducirAudioDelPaso() {
   }
 
   vozTutorial.src = ruta;
+  vozTutorial.muted = audioSilenciado;
+
+  // Bloquear desde que empieza a cargar, sin esperar a que suene.
+  bloquearAccionesDuranteAudio();
+
+  estado.textContent =
+    "Espera a que termine la explicación para realizar la acción.";
 
   vozTutorial.play().catch(() => {
-    // Ignorar avisos de un audio que ya fue sustituido.
     if (solicitudActual !== solicitudAudio) return;
-
-    estado.textContent =
-      "Pulsa Repetir audio. Si no suena, revisa el nombre y la ruta del archivo.";
+    mostrarErrorDeAudio();
   });
 }
 
@@ -956,12 +1073,16 @@ document.getElementById("iniciar-audio")
 
 document.getElementById("repetir-audio")
   .addEventListener("click", () => {
+    if (audioEnCurso) return;
     reproducirAudioDelPaso();
   });
 
 document.getElementById("silenciar-audio")
   .addEventListener("click", () => {
     audioSilenciado = !audioSilenciado;
+
+    // Cambiar el sonido sin detener ni reiniciar la explicación.
+    vozTutorial.muted = audioSilenciado;
 
     const boton = document.getElementById("silenciar-audio");
 
@@ -973,11 +1094,7 @@ document.getElementById("silenciar-audio")
       "aria-pressed",
       String(audioSilenciado)
     );
-
-    reproducirAudioDelPaso();
-  });
-
-// ACTUALIZAR LA PANTALLA Y LAS INSTRUCCIONES
+  });// ACTUALIZAR LA PANTALLA Y LAS INSTRUCCIONES
 
 
 function render() {
@@ -1040,8 +1157,18 @@ function render() {
 function showError(message) {
   const errorBox = $("error");
 
-  if (errorBox) {
-    errorBox.textContent = message;
+  if (!errorBox) return;
+
+  errorBox.textContent = message;
+
+  // Llevar el error a la vista en el formulario de reunión.
+  if (errorBox.classList.contains("reunion-error")) {
+    errorBox.focus({ preventScroll: true });
+
+    errorBox.scrollIntoView({
+      behavior: "smooth",
+      block: "center"
+    });
   }
 }
 
@@ -1195,5 +1322,28 @@ $("reset").addEventListener("click", function () {
 });
 
 // MOSTRAR LA PRIMERA PANTALLA
+
+// ACCESO DIRECTO AL BOTÓN DE PERIODICIDAD
+
+document.addEventListener("click", event => {
+  const boton = event.target.closest(
+    '[data-scroll="periodicidad"]'
+  );
+
+  if (!boton || audioEnCurso) return;
+
+  const destino = document.querySelector(
+    '[data-action="preparar-periodicidad"]'
+  );
+
+  if (!destino) return;
+
+  destino.focus({ preventScroll: true });
+
+  destino.scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+  });
+});
 
 render();
