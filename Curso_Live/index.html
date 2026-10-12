@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Teams · Practica paso a paso</title>
+<link rel="stylesheet" href="Recursos/Recursos_Teams/teams.css">
+</head>
+
+<body>
+  <header class="page-header">
+    <div>
+      <div class="eyebrow">
+        MODELO LIVE 2026 · PRUEBA INTERACTIVA
+      </div>
+
+      <h1>Aprende Teams haciendo</h1>
+
+      <p>
+        Tres recorridos. Sigue las indicaciones y practica en la pantalla.
+      </p>
+    </div>
+
+    <span class="tag">
+      Simulación · sin conexión a tu cuenta
+    </span>
+  </header>
+
+  <main class="wrap">
+    <nav class="chapters" aria-label="Tutoriales">
+      <button type="button" data-chapter="0">
+        01 · Creación del equipo
+        <small>De un clic a tu aula de clase</small>
+      </button>
+
+      <button type="button" data-chapter="1">
+        02 · Programación de sesiones
+        <small>Tres sábados en el calendario</small>
+      </button>
+
+      <button type="button" data-chapter="2">
+        03 · Publicación de la grabación
+        <small>Comparte la clase en General</small>
+      </button>
+    </nav>
+
+    <div class="layout">
+      <aside class="coach">
+        <span class="badge">Tu guía paso a paso</span>
+
+        <div class="step" id="counter"></div>
+        <h2 id="instruction"></h2>
+        <p id="explanation"></p>
+        <div class="audio-controles">
+  <button type="button" id="iniciar-audio">
+    ▶ Comenzar con audio
+  </button>
+
+  <button type="button" id="repetir-audio" disabled>
+    ↻ Repetir audio
+  </button>
+
+  <button type="button" id="silenciar-audio" disabled>
+    Silenciar
+  </button>
+</div>
+
+<p id="estado-audio" role="status"></p>
+
+        <div class="progress">
+          <div id="bar"></div>
+        </div>
+
+        <p class="hint">
+          El borde naranja indica dónde interactuar.
+          Los datos son de práctica.
+        </p>
+
+        <footer>
+          <button type="button" id="back">
+            ← Paso anterior
+          </button>
+
+          <button type="button" id="reset">
+            Reiniciar
+          </button>
+        </footer>
+      </aside>
+
+      <section class="app" aria-label="Simulación de Microsoft Teams">
+        <div class="topbar">
+          <span class="lanzador" aria-hidden="true">⠿</span>
+          <span class="brand">Teams</span>
+
+          <div class="search">
+            ⌕ Búsqueda (Ctrl+Alt+E)
+          </div>
+
+          <span aria-hidden="true">···</span>
+          <span class="avatar">DO</span>
+        </div>
+
+        <div class="appbody">
+          <nav class="rail" aria-label="Menú de Teams">
+            <span>
+              <b aria-hidden="true">♧</b>
+              Actividad
+            </span>
+
+            <span>
+              <b aria-hidden="true">☏</b>
+              Chat
+            </span>
+
+            <span class="rail-activo" id="rail-teams">
+              <b aria-hidden="true">▣</b>
+              Equipos
+            </span>
+
+            <span>
+              <b aria-hidden="true">▢</b>
+              Tareas
+            </span>
+
+            <span id="rail-calendar">
+              <b aria-hidden="true">▦</b>
+              Calendario
+            </span>
+
+            <span>
+              <b aria-hidden="true">···</b>
+              Más
+            </span>
+
+            <span>
+              <b aria-hidden="true">⊞</b>
+              Aplicaciones
+            </span>
+          </nav>
+
+          <div class="workspace" id="screen"></div>
+        </div>
+      </section>
+    </div>
+
+    <p class="bottomnote">
+      Prototipo educativo inspirado en Teams.
+      Los botones y pantallas pueden variar en tu versión institucional.
+      <br>
+      Fechas de ejemplo: 10, 17 y 24 de octubre de 2026.
+      Horario de práctica: 14:00–15:30.
+      <br>
+      No se crean equipos ni publicaciones reales.
+    </p>
+  </main>
+<script src="Recursos/Recursos_Teams/teams.js"></script>
+</body>
+</html>
