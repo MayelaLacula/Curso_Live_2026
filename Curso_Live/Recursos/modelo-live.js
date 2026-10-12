@@ -5,7 +5,7 @@ const videos = {
   sesiones: "Recursos/Videos/Sesiones sincrónicas.mp4",
   estructura: "Recursos/Videos/Estructura de la sesión .mp4",
   tips: "Recursos/Videos/Tips para una clase dinámica.mp4",
-  banco: "recursos/Videos/Banco de actividades ¿Cómo elegir.mp4",
+  banco: "Recursos/Videos/Banco de actividades ¿Cómo elegir.mp4",
 
   teams: [
     {

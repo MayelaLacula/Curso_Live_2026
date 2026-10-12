@@ -913,24 +913,24 @@ function renderRecordingPublication() {
 
 const audiosPorTutorial = [
   [
-    "Recursos/Recursos_Teams/Audios/Vamos a crear tu equipo en Microsoft Teams.mp3",
-    "Recursos/Recursos_Teams/Audios/selecciona.mp3",
-    "Recursos/Recursos_Teams/Audios/sin_abreviaturas.mp3",
-    "Recursos/Recursos_Teams/Audios/equipo_04.mp3",
-    "Recursos/Recursos_Teams/Audios/equipo_05.mp3"
+    "Recursos/Recursos_Teams/Audios/Vamos a crear tu equipo en Microsoft Teams.MP3",
+    "Recursos/Recursos_Teams/Audios/selecciona.MP3",
+    "Recursos/Recursos_Teams/Audios/sin_abreviaturas.MP3",
+    "",
+    ""
   ],
   [
-    "Recursos/Recursos_Teams/Audios/Programar_reunion01.mp3",
-    "Recursos/Recursos_Teams/Audios/Coloca_SesionesSincronicas.mp3",
-    "Recursos/Recursos_Teams/Audios/Programa_los_3Sab.mp3",
-    "Recursos/Recursos_Teams/Audios/Respeta_Horarios.mp3"
+    "Recursos/Recursos_Teams/Audios/Programar_reunion01.MP3",
+    "Recursos/Recursos_Teams/Audios/Coloca_SesionesSincronicas.MP3",
+    "Recursos/Recursos_Teams/Audios/Programa_los_3Sab.MP3",
+    "Recursos/Recursos_Teams/Audios/Respeta_Horarios.MP3"
   ],
   [
-    "Recursos/Recursos_Teams/Audios/Publica_grabacion01.mp3",
-    "Recursos/Recursos_Teams/Audios/Publica_grabacion02.mp3",
-    "Recursos/Recursos_Teams/Audios/Publica_grabacion03.mp3",
-    "Recursos/Recursos_Teams/Audios/Publica_grabacion04.mp3",
-    "Recursos/Recursos_Teams/Audios/Publica_grabacion05.mp3"
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion01.MP3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion02.MP3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion03.MP3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion04.MP3",
+    "Recursos/Recursos_Teams/Audios/Publica_grabacion05.MP3"
   ]
 ];
 
